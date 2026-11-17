@@ -14,7 +14,7 @@ for airport in shortestRouteToCity:
     print(DecryptID(airport))
 print(timeItTakes)
 """
-#print("The length of the shortest route to Sydney is: ",len(shortestRouteToSydney)-1)
+#print("The length of the shortest route to city is: ",len(shortestRouteToSydney)-1)
 
 #furthestPoint = FurthestPointFunction(graphDict)
 #VisualizeRoute(furthestPoint[1])
@@ -29,6 +29,6 @@ VisualizeGraph(graphDict)
 
 """
 plan:
-8. realize how to do the github/jupyter part ffs
+8. realize how to do the github/jupyter part
 9. comment everything
 """
