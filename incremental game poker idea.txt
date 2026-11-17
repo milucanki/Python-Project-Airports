@@ -1,0 +1,49 @@
+game which is an incremental/idler
+you control a character/mouse that runs around drawing a deck of cards
+each deck of cards plays by poker rules, more value the deck has = more damage/ more stuff happening
+very neuron activating
+tech tree has stuff like the hp of the character, draw rate, chances of getting a good hand
+maybe can have different playstyles: big hp and low damage, but if you get the jackpot can run into enemies and invincible
+summoner: summon a smaller version of you that can only get a hand of 1+2+... cards
+chill vibes
+even when you get the jackpot you can keep drawing and if you keep getting jackpots even more adrenaline inducing visuals and shit
+
+another system of gambling: gacha, 777
+scratch cards
+
+guy gets kicked out of a kiosk/ ramen bar because of reasons
+somehow during the altercation a scratch card landed on him
+gets jumped by the mafia or yakuza or something
+different types of enemies:
+	- goon
+	- brawler goon
+	- gun goon
+	- bosses
+
+
+main guy: black mullet, glasses, red suit, white shirt, red shoes, suspenders
+everytime you get an upgrade his model changes
+
+
+taunt button that makes him dance, later in the tech tree he can get bonuses for dancing
+
+
+a coin toss -> scratch card -> slot machine -> poker -> Pachinko -> gacha
+
+do i want to make it an increment where the guy gets all types of gambles
+or do i want to make it a playstyle thing.
+
+tech tree:
+
+ADD INVINCIBLE FRAME DODGE
+
+
+
+make it wasd + aim like kill the crow or vampire survivors
+
+
+
+Development:
+1. Story
+2. Theme
+3. Gameplay Mechanics

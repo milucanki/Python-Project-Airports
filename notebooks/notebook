@@ -1,0 +1,29 @@
+Introduction: Explain the problem, aircraft assumptions and objectives.
+
+
+
+Data preparation: Load and clean the OurAirports dataset using Pandas.
+
+
+
+Graph construction: Explain airports as nodes and possible flights as edges.
+
+
+
+Network visualisation: Show the resulting airport network using NetworkX.
+
+
+
+BFS: Find the route with the minimum number of flights between the origin and destination.
+
+
+
+Dijkstra: Find the route with minimum total travel time.
+
+
+
+Farthest reachable airport: Find the farthest airport reachable with at most 10 stops.
+
+
+
+Comparison and conclusions: Compare the algorithms' results and discuss their differences.
