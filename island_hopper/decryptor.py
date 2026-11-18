@@ -33,7 +33,7 @@ def GetRegion(inputRegion):
         outputRegion = regions.loc[inTableCheck, "name"].iloc[0]
         return outputRegion
 
-    # If not, then None is returned which means that the country code is unknown.
+    # If not, then None is returned which means that the region code is unknown.
     return None
 
 def IDToMunicipality(inputId):
@@ -54,32 +54,35 @@ def IDToMunicipality(inputId):
     airportRecord = by_id.loc[int(inputId)]
 
     if airportRecord["municipality"] == "":
+        # The municipality code was not found in the database.
         return None
 
     return airportRecord["municipality"].lower()
 
 def DecryptID(unknownId):
     """
-    Function that gets an input the ID of an airport and returns in which municipality this airport is in.
-    It checks the ID with each of the records of  the original airports.csv file and, when there is a match, it gives the municipality as an output.
-    games = pd.read_csv("data/games.csv")
+    Function that gets an input the ID of an airport and returns all information about it.
+    It checks the ID with each of the records of the validAirports.csv file and, when there is a match, it returns all relevant information as a dictionary.
     """
     outputDictionary = {}
+    # Using "keep_default_na=False" because Pandas kept on assuming NA (North America) was referring to NaN
     airports = pd.read_csv("data/validAirports.csv", keep_default_na=False)
     by_id = airports.set_index("id")
 
     """
-    Edge case to check if the value of the unknown ID is even in the database.
+    Edge case: Check if the value of the input ID is even in the database.
     If not, return None.
     """
     if int(unknownId) not in by_id.index:
         return None
 
+    # Since the CSV file already has IDs for every records, it is possible to just use them.
     airport = by_id.loc[int(unknownId)]
 
-    # Using a lambda function to decrypt every possible continent code.
+    # Using a lambda function to decrypt every possible continent code, so the location of the airplane is clear.
     continentDecryptor = lambda x: "Europe" if x == "EU" else "Asia" if x == "AS" else "North America" if x == "NA" else "Oceania" if x == "OC" else "South America" if x == "SA" else "Africa" if x == "AF" else "Antarctica" if x == "AN" else "None"
 
+    # Format of the output dictionary.
     outputDictionary[airport["name"]] = {
         "iata_code": airport["iata_code"],
         "type": airport["type"],
@@ -93,14 +96,13 @@ def DecryptID(unknownId):
 
     return outputDictionary
 
-
 def InputSelectorFunction():
     """
-    Function that realizes which airport of origin the small airplane will start from and outputs the ID of that airport in order for the BFS and Dijkstra functions to use it.
+    Function that realizes which airport of origin the small airplane will start from and returns the ID of that airport in order for the BFS and Dijkstra functions to use it.
     """
     ui = str(input("Enter a city origin: "))
     userInput = ui.lower()
-    # Initializing a list in which the user will have to choose from.
+    # Initializing a list of all possible airports that are related to the user's input.
     possibleOutputList = []
 
     airports = pd.read_csv("data/validAirports.csv", keep_default_na=False)
@@ -131,7 +133,7 @@ def InputSelectorFunction():
 
 def OutputSelectorFunction():
     """
-    Function that realizes which airport of destination the small airplane will arrive on and outputs the municipality name of it.
+    Function that realizes which destination airport the user desires and returns the municipality name of it in order for the BFS and Dijkstra functions to use it.
     """
     ui = str(input("Enter a city destination: "))
     userInput = ui.lower()
@@ -149,11 +151,11 @@ def OutputSelectorFunction():
     else:
         return None
 
-
 def CalculateRouteTime(path, graphDict):
     """
     Function that takes as input the overall graph and a route in it and returns the time it takes for that route to happen.
     It just simply goes along the route and sums up the criterias that take time for the airplane (the actual distance, the refueling - 2, the customs).
+    Used for the BFS functions.
     """
     totalTime = 0
 
@@ -165,7 +167,7 @@ def CalculateRouteTime(path, graphDict):
         # Finding a corresponding edge.
         for edge in graphDict[currentAirport]["edges"]:
             if edge["destination"] == nextAirport:
-                # Adds the time which was calculated when all of the edges were created to the total time.
+                # Adds the time which was already calculated when all of the edges were created in the graph dictionary.
                 totalTime += edge["totalTime_hours"]
 
     # Adding the refueling at each airport - 2 (the airplane doesn't refuel at the origin and the end).

@@ -24,7 +24,7 @@ print(timeItTakes)
 
 
 
-VisualizeGraph(graphDict)
+#VisualizeGraph(graphDict)
 
 
 """

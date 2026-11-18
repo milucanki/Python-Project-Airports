@@ -3,17 +3,24 @@ from haversine import haversineFormula
 
 def breadthFirstSearch(graphDict):
     """
+    Function that takes as input the entire graph dictionary + the inputs from the user. The user's input and output function realizes where does the user want to start and end.
+
     In order to find the lowest possible amount of stops between a starting and ending airport, a Breadth First Search algorithm was used.
-    The BFS starts identifying airports, starting from an airport that the user has chosen, until it spots an airport ID that is from the same
+    The BFS starts by identifying airports, starting from an airport which the user has chosen, until it spots an airport ID that is from the same
     municipality/city (Sydney) as the user wants.
-    Then, the function follows the dictionary that the BFS algorithm did from the end to the start in order to get the route that was taken by the algorithm.
+    It does this by using 3 variables:
+        - queue: a list that holds every single airport that needs to get explored. Every time the BFS enters a new level, and every airport from that node gets explored one-by-one,
+    it gets populated with that all of the airports that can be reached from the nodes of that level
+        - visited: set that holds every airport which has been visited and had every single adjacent node from it appended to "queue"
+        - allBFSExploredPaths: a dictionary that has the key as the next airport and the value as the predecessor
+
+    Then, the function follows the dictionary allBFSExploredPaths from the end (the wanted destination) to the start in order to get the route that was taken by the algorithm.
     """
     # Getting the starting airport from the user.
     originAirport = InputSelectorFunction()
     if originAirport == None:
         print("Something went wrong!")
         return None
-
 
     # Getting the wanted destination of the user.
     wantedDestination = OutputSelectorFunction()
@@ -45,7 +52,7 @@ def breadthFirstSearch(graphDict):
 
     while queue:
         if breakWhileCheck:
-            # Getting out of the while-loop.
+            # Getting out of the while-loop when the wanted node has been found.
             break
         currentAirport = queue.pop(0)
 
@@ -95,6 +102,7 @@ def breadthFirstSearch(graphDict):
 
 def FurthestPointFunction(graphDict):
     """
+    Function that takes as input the entire graph dictionary + the user's inputs.
     Modified version of the BFS algorithm from up. Instead of checking for a specific node down the BFS graph level, the algorithm goes down "wantedNodeLevel" levels and takes in consideration
     all of the nodes on that level and the ones before, also. Then, the Haversine function is applied to every node and the airport with the highest distance between it and the origin
     airport gets returned.
@@ -175,12 +183,10 @@ def FurthestPointFunction(graphDict):
             furthestAirportId = id
             furthestAirport = decryptedId
 
-    """
-    furthestAirportId = ID of the furthest airport
-    furthestAirport = dictionary information about this airport
-    biggestDistance = distance between origin airport and the destination airport
-    """
-
+    # furthestAirportId = ID of the furthest airport
+    # furthestAirport = dictionary information about this airport
+    # biggestDistance = distance between origin airport and the destination airport
+    
     # Same path reversing process as the previous BFS function.
     path = []
     current = furthestAirportId
