@@ -2,9 +2,16 @@
 __pycache__/
 *.py[cod]
 *.egg-info/
+.pytest_cache/
 
 # Editors and operating systems
 .vscode/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Virtual environments
+.venv/
+venv/
+env/
+.python-version
