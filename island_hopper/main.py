@@ -2,33 +2,36 @@ from extractor import extractValidAirports, edgesPopulator
 from bfs import breadthFirstSearch, FurthestPointFunction
 from decryptor import DecryptID
 from dijkstra import MinimumTimeFunction
-from visualization import VisualizeRoute, VisualizeGraph
+from visualization import VisualizeRoute, VisualizeEntireGraph,VisualizeRouteInEntireGraph
 
+# ========================================================
+# Showing entire graph network (with continents colors)
 nodesDict = extractValidAirports()
-
 graphDict = edgesPopulator(nodesDict, 500.00)
-"""
-shortestRouteToCity,timeItTakes = breadthFirstSearch(graphDict)
+#VisualizeEntireGraph(graphDict)
+# ========================================================
 
-for airport in shortestRouteToCity:
-    print(DecryptID(airport))
-print(timeItTakes)
-"""
-#print("The length of the shortest route to city is: ",len(shortestRouteToSydney)-1)
+# Cities example: Sydney, London, New York, Tokyo, Rio De Janeiro, Cape Town
+# rio de janeiro / new york can't be reached with 500 km fuel tank, but can with 750 km
 
-#furthestPoint = FurthestPointFunction(graphDict)
-#VisualizeRoute(furthestPoint[1])
+# ========================================================
+# Minimum stops needed from origin (Milan) to destination (Sydney)
+#shortestRouteToCity,timeItTakes = breadthFirstSearch(graphDict)
+#VisualizeRoute(shortestRouteToCity,timeItTakes)
+#VisualizeRouteInEntireGraph(shortestRouteToCity,graphDict,timeItTakes)
+# ========================================================
 
-#minTimeTuple = MinimumTimeFunction(graphDict)
-#VisualizeRoute(minTimeTuple[0])
+# ========================================================
+# Minimum time needed from origin (Milan) to destination (Sydney)
+#minTimePath, minTime = MinimumTimeFunction(graphDict)
+#VisualizeRoute(minTimePath,minTime)
+#VisualizeRouteInEntireGraph(minTimePath,graphDict,minTime)
+# ========================================================
 
-
-
-#VisualizeGraph(graphDict)
-
-
-"""
-plan:
-8. realize how to do the github/jupyter part
-9. comment everything
-"""
+# ========================================================
+# Farthest airport that you can reach with at most k (10) stops
+#furthestPointInfoTuple,furthestPointPath,furthestPointTime = FurthestPointFunction(graphDict)
+#furthestPointDistance = furthestPointInfoTuple[2]
+#VisualizeRoute(furthestPointPath,furthestPointTime,furthestPointDistance)
+#VisualizeRouteInEntireGraph(furthestPointPath,graphDict,furthestPointTime,furthestPointDistance)
+# ========================================================

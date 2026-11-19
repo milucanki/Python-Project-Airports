@@ -1,6 +1,12 @@
 from decryptor import IDToMunicipality,InputSelectorFunction,OutputSelectorFunction
 
 def MinimumTimeFunction(graphDict):
+    """
+    Function that takes as input the entire graph dictionary of the airports database and the user's inputs through the InputSelectorFunction() and OutputSelectorFunction() functions.
+    The output of the function is a tuple that contains the path between the 2 nodes and the time it takes to do the route.
+
+    The function considers the total cost/weight/time of each possible route and minimizes it until it gets the lowest value.
+    """
 
     # Getting the starting airport from the user.
     originAirportId = InputSelectorFunction()
@@ -14,6 +20,7 @@ def MinimumTimeFunction(graphDict):
         print("Please enter a valid city!")
         return None
 
+    # Creating a dictionary with the currently known minimum travelling time from the origin airport to every other airport.
     distances = DistanceDictionaryPopulator(originAirportId,graphDict)
 
     # Storing the predecessors similarly to the BFS functions.
@@ -26,6 +33,7 @@ def MinimumTimeFunction(graphDict):
 
     destinationCatch = None
 
+    # The while-loop works until there are no more airports to visit.
     while unvisited:
 
         # Finds the unvisited airport with the smallest currently known travel time between origin airport and every other airport in the graph
@@ -35,10 +43,10 @@ def MinimumTimeFunction(graphDict):
         if distances[currentAirport] == float("inf"):
             break
 
-        # Removing the current airport from the unvisited list because it has been visited already and no longer needs to be visited.
+        # Removing the current airport from the unvisited list because it has been visited already and its shortest travel time has been finalized.
         unvisited.remove(currentAirport)
 
-        # Edge case: checking if the input airport is the same as the destination airport.
+        # Checking if the algorithm reached the wanted airport.
         if IDToMunicipality(currentAirport) == wantedDestination.lower():
             destinationCatch = currentAirport
             break
@@ -52,12 +60,10 @@ def MinimumTimeFunction(graphDict):
                 continue
 
 
-            # Getting how much traveling time it took + 1 hour to refuel at another airport
+            # Calculating travel time + 1 hour to refuel at another airport and then comparing the new route with the existing one.
             edgeCost = edge["totalTime_hours"]
             if currentAirport != originAirportId:
                 edgeCost += 1
-
-            # Comparing new route with the existing one.
             newTime = distances[currentAirport] + edgeCost
 
             # Comparing the new time with the best time found so far.
@@ -68,7 +74,8 @@ def MinimumTimeFunction(graphDict):
 
     # Edge case: if the destination ID is never found.
     if destinationCatch is None:
-        return None
+        print("Place is unreachable! Increase the plane's max fuel tank!")
+        raise ValueError("Place is unreachable! Increase the plane's max fuel tank!")
 
     # Same reconstruction logic from the BFS functions.
     path = []
@@ -81,7 +88,7 @@ def MinimumTimeFunction(graphDict):
     # Reversing the output list.
     path.reverse()
     
-    return (path, distances[destinationCatch])
+    return (path, float(distances[destinationCatch]))
 
 
 
@@ -89,7 +96,7 @@ def MinimumTimeFunction(graphDict):
 def DistanceDictionaryPopulator(originAirportId,graphDict):
     """
     Function that populates the distance dictionary which contains the weight of the edges between the starting node and every single other node in the graph.
-    Since it is being initialized the "smallest" possible value that the distances can be is infinity. If the algorithm spots a lower value then it will replace infinity.
+    Since there hasn't been found a route to those airports yet., the "smallest" possible value that the distances are is infinity. If the algorithm spots a lower value then it will replace infinity.
     """
     distances = {}
 

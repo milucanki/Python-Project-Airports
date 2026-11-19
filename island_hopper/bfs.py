@@ -4,6 +4,7 @@ from haversine import haversineFormula
 def breadthFirstSearch(graphDict):
     """
     Function that takes as input the entire graph dictionary + the inputs from the user. The user's input and output function realizes where does the user want to start and end.
+    The output is a tuple of the route from the user's origin and destination and the time it takes to get there.
 
     In order to find the lowest possible amount of stops between a starting and ending airport, a Breadth First Search algorithm was used.
     The BFS starts by identifying airports, starting from an airport which the user has chosen, until it spots an airport ID that is from the same
@@ -57,7 +58,7 @@ def breadthFirstSearch(graphDict):
         currentAirport = queue.pop(0)
 
         # The variable nextPossibleDest is the list of all possible next nodes that the origin node can go to / starting from this node, the next level of the graph.
-        # It is taken from the graph dictionary's "edges" value.
+        # It is taken from the graph dictionary's "edges" value of the current airport.
         nextPossibleDest = graphDict[currentAirport]["edges"]
 
         for destination in nextPossibleDest:
@@ -79,9 +80,10 @@ def breadthFirstSearch(graphDict):
                 destinationCatch = idNextNode
                 break
 
-    # Edge case if the destination is unreachable or not in the database.
+    # Edge case if the destination is u nreachable or not in the database.
     if destinationCatch is None:
-        return None
+        print("Place is unreachable! Increase the plane's max fuel tank!")
+        raise ValueError("Place is unreachable! Increase the plane's max fuel tank!")
 
     
     path = []
@@ -102,7 +104,8 @@ def breadthFirstSearch(graphDict):
 
 def FurthestPointFunction(graphDict):
     """
-    Function that takes as input the entire graph dictionary + the user's inputs.
+    Function that takes as input the entire graph dictionary + the user's inputs and returns a list with information of the furthest airport, the distance in kilometres to that node,
+    the time it takes to get there and the actual route.
     Modified version of the BFS algorithm from up. Instead of checking for a specific node down the BFS graph level, the algorithm goes down "wantedNodeLevel" levels and takes in consideration
     all of the nodes on that level and the ones before, also. Then, the Haversine function is applied to every node and the airport with the highest distance between it and the origin
     airport gets returned.
@@ -121,6 +124,9 @@ def FurthestPointFunction(graphDict):
         print("Please enter an integer number as the level.")
         return None
 
+    if wantedNodeLevel < 0:
+        raise ValueError("The graph level should not be smaller than 0.") 
+
     # Initiating the variables for the BFS algorithm.
     queue = []
     queue.append(originAirport)
@@ -131,8 +137,10 @@ def FurthestPointFunction(graphDict):
     allBFSExploredPaths = {}
     allBFSExploredPaths[originAirport] = None
 
+    # Count variable that will get incremented until it reaches the level wanted by the user.
     wantedLevelCount = 0
 
+    # While-loop that checks if there are any more airports to check and makes sure that the BFS doesn't go beyond the requested level.
     while queue and wantedLevelCount < wantedNodeLevel+1:
         nodesInCurrentLevel = len(queue)
 
@@ -141,19 +149,27 @@ def FurthestPointFunction(graphDict):
             currentAirport = queue.pop(0)
 
             # The variable nextPossibleDest is the list of all possible next nodes that the origin node can go to.
-            # It is taken from the graph dictionary's "edges" value.
+            # It is taken from the graph dictionary's "edges" value of the current airport.
             nextPossibleDest = graphDict[currentAirport]["edges"]
 
+            # This for-loop explores the neighboring nodes of the current airport.
             for destination in nextPossibleDest:
+                # Gets ID.
                 idNextNode = destination["destination"]
+                # Checks if it has been visited.
                 if idNextNode in visited:
                     continue
+                # Mark as visited.
                 visited.add(idNextNode)
+                # Store predecessor.
                 allBFSExploredPaths[idNextNode] = currentAirport
+                # Add it in queue for next level.
                 queue.append(idNextNode)
+
+        # Increments so that the algorithm moves to the next level.
         wantedLevelCount += 1
         
-
+    # Finding the smallest distance between the origin and all level x nodes.
     
     # Initializing the information about the origin airport.
     decryptedOrigin = DecryptID(originAirport)
@@ -179,6 +195,8 @@ def FurthestPointFunction(graphDict):
         distanceBetweenOriginDestination = haversineFormula(latOrigin,longOrigin,latDest,longDest)
 
         if biggestDistance < distanceBetweenOriginDestination:
+            # If the biggestDistance variable is not the biggest distance between them all, it must get updated with the actual biggest distance
+            # This happens until biggestDistance is actually the biggest distance.
             biggestDistance = distanceBetweenOriginDestination
             furthestAirportId = id
             furthestAirport = decryptedId

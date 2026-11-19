@@ -35,7 +35,7 @@ f.close()
 
 def extractValidAirports():
     """
-    This function takes the attributes from the valid aiport CSV file and inserts them into a dictionary in a specific format.
+    This function takes the attributes from the valid aiport CSV file and inserts them into a dictionary in a specific format, returning them.
     """
     outputNodesDictionary = {}
     with open("data/validAirports.csv", newline='',encoding='utf-8') as f:
@@ -43,7 +43,7 @@ def extractValidAirports():
         # Skipping the attributes names row.
         next(reader)
         for row in reader:
-            idNode, nameNode, latNode, longNode, countryNode = row[0],row[3],row[4],row[5],row[8]
+            idNode, nameNode, latNode, longNode, countryNode, continentNode = row[0],row[3],row[4],row[5],row[8],row[7]
             # The specific dictionary format. The key of each entry is the ID of that airport and the value of the key is a dictionary that contains the information of that airport.
             # The "edges" key's values will be a list of all possible airports that the small airplane can fly to based on the fuel tank / max range that it has.
             # The latitude and the longitude must have the float data type in order to make the Haversine formula output a result that is as accurate as possible.
@@ -52,6 +52,7 @@ def extractValidAirports():
                 "latitude": float(latNode),
                 "longitude": float(longNode),
                 "country": countryNode,
+                "continent": continentNode,
                 "edges": []
             }
     return outputNodesDictionary
