@@ -7,7 +7,7 @@ from visualization import VisualizeRoute, VisualizeEntireGraph,VisualizeRouteInE
 # ========================================================
 # Showing entire graph network (with continents colors)
 nodesDict = extractValidAirports()
-graphDict = edgesPopulator(nodesDict, 500.00)
+graphDict = edgesPopulator(nodesDict, 750.00)
 #VisualizeEntireGraph(graphDict)
 # ========================================================
 

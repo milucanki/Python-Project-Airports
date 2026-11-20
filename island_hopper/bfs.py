@@ -1,7 +1,7 @@
-from decryptor import DecryptID, IDToMunicipality, InputSelectorFunction,OutputSelectorFunction,CalculateRouteTime
-from haversine import haversineFormula
+from .decryptor import DecryptID, IDToMunicipality, InputSelectorFunction,OutputSelectorFunction,CalculateRouteTime
+from .haversine import haversineFormula
 
-def breadthFirstSearch(graphDict):
+def breadthFirstSearch(graphDict, originAirport=None, wantedDestination=None):
     """
     Function that takes as input the entire graph dictionary + the inputs from the user. The user's input and output function realizes where does the user want to start and end.
     The output is a tuple of the route from the user's origin and destination and the time it takes to get there.
@@ -17,17 +17,19 @@ def breadthFirstSearch(graphDict):
 
     Then, the function follows the dictionary allBFSExploredPaths from the end (the wanted destination) to the start in order to get the route that was taken by the algorithm.
     """
-    # Getting the starting airport from the user.
-    originAirport = InputSelectorFunction()
-    if originAirport == None:
-        print("Something went wrong!")
-        return None
+    # Getting the starting airport from the user if no airport was provided.
+    if originAirport is None:
+        originAirport = InputSelectorFunction()
+        if originAirport is None:
+            print("Something went wrong!")
+            return None
 
-    # Getting the wanted destination of the user.
-    wantedDestination = OutputSelectorFunction()
-    if wantedDestination == None:
-        print("Please enter a valid city!")
-        return None
+    # Getting the wanted destination of the user if no airport was provided.
+    if wantedDestination is None:
+        wantedDestination = OutputSelectorFunction()
+        if wantedDestination is None:
+            print("Please enter a valid city!")
+            return None
 
     # Checking if the input airport is the destination
     if IDToMunicipality(originAirport) == wantedDestination.lower():

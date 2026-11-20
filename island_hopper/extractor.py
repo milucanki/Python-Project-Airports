@@ -1,44 +1,50 @@
 
 import csv
-from haversine import haversineFormula as haversine
+from .haversine import haversineFormula as haversine
+import os
 
+# Defining project and CSV paths.
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-validAirportsList = []
+ORIGINAL_CSV = os.path.join(PROJECT_ROOT, "data", "airports.csv")
+VALID_CSV = os.path.join(PROJECT_ROOT, "data", "validAirports.csv")
 
-"""
-Starting by cleaning the original CSV file. Since the project does not require all of the attributes of the CSV file, a new CSV file will be created which only contains the 
-neccesary attributes. The final, usable CSV file will need all of its attributes to have a value.
-"""
-with open("data/airports.csv", newline='',encoding='utf-8') as f:
-    reader = csv.reader(f, delimiter=",")
+def cleanAirports():
+    validAirportsList = []
+    """
+    Function that returns the length of the final valid database.
+    Starting by cleaning the original CSV file. Since the project does not require all of the attributes of the CSV file, a new CSV file will be created which only contains the 
+    neccesary attributes. The final, usable CSV file will need all of its attributes to have a value.
+    """
+    with open(ORIGINAL_CSV, newline='', encoding='utf-8') as f:
+        reader = csv.reader(f, delimiter=",")
 
-    # Argument used to append and skip the row that contains the attribute names.
-    validAirportsList.append(next(reader))
+        # Argument used to append and skip the row that contains the attribute names.
+        validAirportsList.append(next(reader))
 
-    # Getting a list with all of the valid rows.
-    for validRow in reader:
-        # Making sure that the neccessary attributes are not empty.
-        recordId, airportId, airportType, airportName, airportLatitude, airportLongitude, airportAltitude, airportContinent, airportCountry, airportRegion, airportMunicipality, airportIataCode = validRow[0],validRow[1],validRow[2],validRow[3],validRow[4],validRow[5],validRow[6],validRow[7],validRow[8],validRow[9],validRow[10],validRow[13]
-        emptyAttributesCheck = recordId == "" or airportId == "" or airportName == "" or airportLatitude == "" or airportLongitude == "" or airportContinent == "" or airportCountry == "" or airportRegion == "" or airportMunicipality == "" or airportIataCode == ""
-        # Only checking for medium or large airports because those are the only airports the plane can land on.
-        if airportType == "medium_airport" or airportType == "large_airport":
-            if not(emptyAttributesCheck):
-                validAirportsList.append(validRow)
-f.close()
+        # Getting a list with all of the valid rows.
+        for validRow in reader:
+            # Making sure that the neccessary attributes are not empty.
+            recordId, airportId, airportType, airportName, airportLatitude, airportLongitude, airportAltitude, airportContinent, airportCountry, airportRegion, airportMunicipality, airportIataCode = validRow[0],validRow[1],validRow[2],validRow[3],validRow[4],validRow[5],validRow[6],validRow[7],validRow[8],validRow[9],validRow[10],validRow[13]
+            emptyAttributesCheck = recordId == "" or airportId == "" or airportName == "" or airportLatitude == "" or airportLongitude == "" or airportContinent == "" or airportCountry == "" or airportRegion == "" or airportMunicipality == "" or airportIataCode == ""
+            # Only checking for medium or large airports because those are the only airports the plane can land on.
+            if airportType == "medium_airport" or airportType == "large_airport":
+                if not(emptyAttributesCheck):
+                    validAirportsList.append(validRow)
 
-# Writing the list into the final CSV file, which will be used later.
-with open("data/validAirports.csv", 'w', newline='', encoding="utf-8") as f:
-    writer = csv.writer(f)
-    writer.writerows(validAirportsList)
-f.close()
+    # Writing the list into the final CSV file, which will be used later.
+    with open(VALID_CSV, 'w', newline='', encoding='utf-8') as f:
+        writer = csv.writer(f)
+        writer.writerows(validAirportsList)
 
+    return len(validAirportsList) - 1
 
 def extractValidAirports():
     """
     This function takes the attributes from the valid aiport CSV file and inserts them into a dictionary in a specific format, returning them.
     """
     outputNodesDictionary = {}
-    with open("data/validAirports.csv", newline='',encoding='utf-8') as f:
+    with open(VALID_CSV, newline='', encoding='utf-8') as f:
         reader = csv.reader(f, delimiter=",")
         # Skipping the attributes names row.
         next(reader)

@@ -1,6 +1,6 @@
 import networkx as nx
 import matplotlib.pyplot as plt
-from decryptor import DecryptID
+from .decryptor import DecryptID
 
 def VisualizeEntireGraph(graphDict):
     """

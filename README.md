@@ -7,7 +7,7 @@ is needed for customs whenever you land in a different country than the one you 
 choice), is it possible to reach Sydney? How many stops and how much time are needed at minimum? And which is the farthest airport that you can reach with at
 most 10 stops?
 
-
+PUT THE SET UP EXPLANANTION HERE, TECHNICAL STUFF
 Github page for database: https://github.com/davidmegginson/ourairports-data
 
 Website: https://ourairports.com/data/

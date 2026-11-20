@@ -1,4 +1,13 @@
 import pandas as pd
+import os
+
+# Defining project and CSV paths.
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+ORIGINAL_CSV = os.path.join(PROJECT_ROOT, "data", "airports.csv")
+VALID_CSV = os.path.join(PROJECT_ROOT, "data", "validAirports.csv")
+COUNTRIES_CSV = os.path.join(PROJECT_ROOT, "data", "countries.csv")
+REGIONS_CSV = os.path.join(PROJECT_ROOT, "data", "regions.csv")
 
 def GetCountry(inputCountry):
     """
@@ -6,7 +15,7 @@ def GetCountry(inputCountry):
     It is done by traversing the "countries.csv" and finding the record that contains the same country code as the input.
     Afterwards, from this row, the "name" attribute is selected and returned.
     """
-    countries = pd.read_csv("data/countries.csv")
+    countries = pd.read_csv(COUNTRIES_CSV)
 
     inTableCheck = countries["code"] == inputCountry
 
@@ -24,7 +33,7 @@ def GetRegion(inputRegion):
     It is done by traversing the "regions.csv" and finding the record that contains the same region code as the input.
     Afterwards, from this row, the "name" attribute is selected and returned.
     """
-    regions = pd.read_csv("data/regions.csv")
+    regions = pd.read_csv(REGIONS_CSV)
 
     inTableCheck = regions["code"] == inputRegion
 
@@ -42,7 +51,7 @@ def IDToMunicipality(inputId):
     It is done by traversing the "validAirports.csv" and finding the record that shares the same ID with the input one.
     Afterwards, from this row, the "municipality" attribute is selected and returned.
     """
-    airports = pd.read_csv("data/validAirports.csv", keep_default_na=False)
+    airports = pd.read_csv(VALID_CSV, keep_default_na=False)
 
     # Since the database already has an attribute that deals with the unique ID of each entry, Pandas will just use that row as the ID.
     by_id = airports.set_index("id")
@@ -66,7 +75,7 @@ def DecryptID(unknownId):
     """
     outputDictionary = {}
     # Using "keep_default_na=False" because Pandas kept on assuming NA (North America) was referring to NaN
-    airports = pd.read_csv("data/validAirports.csv", keep_default_na=False)
+    airports = pd.read_csv(VALID_CSV, keep_default_na=False)
     by_id = airports.set_index("id")
 
     """
@@ -105,7 +114,7 @@ def InputSelectorFunction():
     # Initializing a list of all possible airports that are related to the user's input.
     possibleOutputList = []
 
-    airports = pd.read_csv("data/validAirports.csv", keep_default_na=False)
+    airports = pd.read_csv(VALID_CSV, keep_default_na=False)
 
     # Checking the database to see if any keywords of the airports correlate to the user's input.
     for idAirports,airport in enumerate(airports["name"]):
@@ -138,7 +147,7 @@ def OutputSelectorFunction():
     ui = str(input("Enter a city destination: "))
     userInput = ui.lower()
 
-    airports = pd.read_csv("data/validAirports.csv", keep_default_na=False)
+    airports = pd.read_csv(VALID_CSV, keep_default_na=False)
     isInDataBase = False
     
     # Checking the database to see if any keywords of the airports correlate to the user's input.
