@@ -1,6 +1,6 @@
-from decryptor import IDToMunicipality,InputSelectorFunction,OutputSelectorFunction
+from .decryptor import IDToMunicipality,InputSelectorFunction,OutputSelectorFunction
 
-def MinimumTimeFunction(graphDict):
+def MinimumTimeFunction(graphDict, originAirportId=None, wantedDestination=None):
     """
     Function that takes as input the entire graph dictionary of the airports database and the user's inputs through the InputSelectorFunction() and OutputSelectorFunction() functions.
     The output of the function is a tuple that contains the path between the 2 nodes and the time it takes to do the route.
@@ -8,17 +8,20 @@ def MinimumTimeFunction(graphDict):
     The function considers the total cost/weight/time of each possible route and minimizes it until it gets the lowest value.
     """
 
-    # Getting the starting airport from the user.
-    originAirportId = InputSelectorFunction()
-    if originAirportId == None:
-        print("Something went wrong!")
-        return None
+    # Getting the starting airport from the user if no airport was provided.
+    if originAirportId is None:
+        originAirportId = InputSelectorFunction()
+        if originAirportId is None:
+            print("Something went wrong!")
+            return None
 
-    # Getting the wanted destination of the user.
-    wantedDestination = OutputSelectorFunction()
-    if wantedDestination == None:
-        print("Please enter a valid city!")
-        return None
+
+    # Getting the wanted destination of the user if no destination was provided.
+    if wantedDestination is None:
+        wantedDestination = OutputSelectorFunction()
+        if wantedDestination is None:
+            print("Please enter a valid city!")
+            return None
 
     # Creating a dictionary with the currently known minimum travelling time from the origin airport to every other airport.
     distances = DistanceDictionaryPopulator(originAirportId,graphDict)

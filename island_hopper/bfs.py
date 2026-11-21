@@ -104,7 +104,7 @@ def breadthFirstSearch(graphDict, originAirport=None, wantedDestination=None):
     return (path,totalTime)
 
 
-def FurthestPointFunction(graphDict):
+def FurthestPointFunction(graphDict, originAirport=None, wantedNodeLevel=None):
     """
     Function that takes as input the entire graph dictionary + the user's inputs and returns a list with information of the furthest airport, the distance in kilometres to that node,
     the time it takes to get there and the actual route.
@@ -112,20 +112,22 @@ def FurthestPointFunction(graphDict):
     all of the nodes on that level and the ones before, also. Then, the Haversine function is applied to every node and the airport with the highest distance between it and the origin
     airport gets returned.
     """
-    # Getting the starting airport from the user.
-    originAirport = InputSelectorFunction()
-    if originAirport == None:
-        print("Something went wrong!")
-        return None
+    # Getting the starting airport from the user if no airport was provided.
+    if originAirport is None:
+        originAirport = InputSelectorFunction()
+        if originAirport is None:
+            print("Something went wrong!")
+            return None
 
-    # Getting the graph level wanted by the user.
-    user_level = input("Enter the number of stops the airplane needs to reach: ")
-    try:
-        wantedNodeLevel = int(user_level)
-    except ValueError:
-        print("Please enter an integer number as the level.")
-        return None
-
+    # Getting the graph level wanted by the user if no level was provided.
+    if wantedNodeLevel is None:
+        user_level = input("Enter the number of stops the airplane needs to reach: ")
+        try:    
+            wantedNodeLevel = int(user_level)
+        except ValueError:
+            print("Please enter an integer number as the level.")
+            return None
+        
     if wantedNodeLevel < 0:
         raise ValueError("The graph level should not be smaller than 0.") 
 
