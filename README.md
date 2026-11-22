@@ -6,10 +6,23 @@ The route, between an origin and a destination airport, can be the one with the 
 
 ## What the project does
 
+The project allows you to get the best flight route between 2 airports that a small airplane can take. These flight routes can also get visualized using graphs. The flight routes are:
+- How many stops are needed at minimum, from an origin airport, to reach a specific destination airport? (`island_hopper/bfs.py`) (Visualization: `island_hopper/visualization.py`)
+- How much time is needed at minimum, from an origin airport, to reach a specific destination airport? (`island_hopper/dijkstra.py`) (Visualization: `island_hopper/visualization.py`)
+- Which is the farthest airport that you can reach with at most 10 stops, from an origin airport? (`island_hopper/bfs.py`) (Visualization: `island_hopper/visualization.py`)
+
+Alongside the route, the project allows you to see a network of all possible airports which this small airplane can land on and how the previously mentioned flight routes look in the entire network. (Visualization: `island_hopper/visualization.py`)
 
 ### How the routes are calculated
 
+The original **OurAirports Dataset** data source was cleaned and filtered to retain only the valid landing locations of the small airplane.
+Each airport is then represented as a node in a graph (`island_hopper/extractor.py`). Airports within the small airplane's maximum flight range are connected by weighted edges. The weight is the estimated flight time.
 
+| Flight route | How it's calculated |
+|------|-----------------|
+| **Minimum number of flights** (`island_hopper/bfs.py`) | Calculated using the Breadth-First Search algorithm to find the route with the fewest flights.|
+| **Minimum travelling time** (`island_hopper/dijkstra.py`) | Calculated using the Dijkstra algorithm to find the route with the lowest total travelling time.|
+| **Farthest reachable airport** (`island_hopper/bfs.py`) | Calculated by modifying the Breadth-First Search algorithm and exploring all airports within the specified number of flights, then selects the farthest airport.  |
 
 ## Data sources
 
