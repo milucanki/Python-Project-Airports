@@ -1,8 +1,10 @@
-from extractor import extractValidAirports, edgesPopulator
-from bfs import breadthFirstSearch, FurthestPointFunction
-from decryptor import DecryptID
-from dijkstra import MinimumTimeFunction
-from visualization import VisualizeRoute, VisualizeEntireGraph,VisualizeRouteInEntireGraph
+from .extractor import extractValidAirports, edgesPopulator
+from .bfs import breadthFirstSearch, FurthestPointFunction
+from .decryptor import DecryptID
+from .dijkstra import MinimumTimeFunction
+from .visualization import VisualizeRoute, VisualizeEntireGraph,VisualizeRouteInEntireGraph
+
+print("Connected to main.py succesfully...")
 
 # ========================================================
 # Showing entire graph network (with continents colors)

@@ -144,8 +144,7 @@ def VisualizeRoute(path,flightTime="",biggestDistance=""):
     pos = nx.kamada_kawai_layout(graph)
 
     # Creating the nodes and edges.
-    nx.draw(graph, pos=pos, labels=labels, with_labels=True, node_color="skyblue",font_size=6)
-
+    nx.draw(graph, pos=pos, labels=labels, with_labels=True, node_color="skyblue",node_size=100,font_size=6)
 
     # Getting information about the route based on the task.
     if flightTime != "":

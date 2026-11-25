@@ -1,5 +1,3 @@
-a clear and informative README.md file, explaining what the project is about, listing important information (e.g., data sources, libraries), and providing clear instructions on how to setup and run the code;
-
 # ✈️ Island Hopper
 Island Hopper is a project that lets you plan the route of a small airplane, through a network of airports.
 The route, between an origin and a destination airport, can be the one with the least amount of stops, the one with the least amount of time taken or the one furthest away from the origin.
@@ -49,15 +47,38 @@ It contains information about the countries where the airports are, including th
 
 ## Setup
 
-
+1. Clone the repository and enter the folder:
+   ```bash
+   git clone https://github.com/<your-user>/Python-Project-Airports.git
+   cd Python-Project-Airports
+   ```
+   
+2. Create a virtual environment and install the dependencies
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate        # on Windows: .venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
 
 ## Run
 
+Start the application from the project folder:
+```
+python -m island_hopper.main
+```
+Follow the terminal prompts 
 
-
+After making your choices, the application calculates the requested route type using BFS or Dijkstra and displays the data about this route, together with the corresponding visualization.
 
 ### The example notebook
 
+[`notebooks/island_hopper_walkthrough.ipynb`](notebooks/island_hopper_walkthrough.ipynb) demonstrates the project step by step. It shows how the airport data was cleaned, the graph construction and visualiztion. Algorithms such as BFS and Dijkstra are shown 
+
+Start Jupyter from the project folder and open it:
+
+```bash
+jupyter lab
+```
 
 
 
