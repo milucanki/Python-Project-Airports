@@ -1,7 +1,9 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 from .decryptor import DecryptID
-
+"""
+Visualizations of the flight routes and networks, drawn with Networkx and Matplotlib.
+"""
 def VisualizeEntireGraph(graphDict):
     """
     Function that is used by the entire graph dictionary in order to create a network visualization of all of the nodes and their edges.

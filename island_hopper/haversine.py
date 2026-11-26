@@ -1,5 +1,7 @@
 import numpy as np
-
+"""
+Distance between two points on Earth, calculated with the Haversine formula.
+"""
 def haversineFormula(lat_origin,long_origin,lat_dest,long_dest):
     """
     This function gets as input the 2 pairs of latitude and longitude of the origin airport and the destination airport and returns the distance between them in kilometers.

@@ -1,6 +1,9 @@
 import pandas as pd
 import os
 
+"""
+Helper functions that decrypt information into readable information.
+"""
 # Defining project and CSV paths.
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 

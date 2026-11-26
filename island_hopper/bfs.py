@@ -1,6 +1,10 @@
 from .decryptor import DecryptID, IDToMunicipality, InputSelectorFunction,OutputSelectorFunction,CalculateRouteTime
 from .haversine import haversineFormula
 
+"""
+Bradth-First Search: fewest stops to a destination city and the farthest airport within a number of stops.
+"""
+
 def breadthFirstSearch(graphDict, originAirport=None, wantedDestination=None):
     """
     Function that takes as input the entire graph dictionary + the inputs from the user. The user's input and output function realizes where does the user want to start and end.

@@ -2,6 +2,9 @@
 import csv
 from .haversine import haversineFormula as haversine
 import os
+"""
+Cleans the OurAirports data and builds the airport graph: airports are nodes and flights within the plane's range are weighted edges.
+"""
 
 # Defining project and CSV paths.
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -10,12 +13,12 @@ ORIGINAL_CSV = os.path.join(PROJECT_ROOT, "data", "airports.csv")
 VALID_CSV = os.path.join(PROJECT_ROOT, "data", "validAirports.csv")
 
 def cleanAirports():
-    validAirportsList = []
     """
     Function that returns the length of the final valid database.
     Starting by cleaning the original CSV file. Since the project does not require all of the attributes of the CSV file, a new CSV file will be created which only contains the 
     neccesary attributes. The final, usable CSV file will need all of its attributes to have a value.
     """
+    validAirportsList = []
     with open(ORIGINAL_CSV, newline='', encoding='utf-8') as f:
         reader = csv.reader(f, delimiter=",")
 

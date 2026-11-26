@@ -1,4 +1,7 @@
 from .decryptor import IDToMunicipality,InputSelectorFunction,OutputSelectorFunction
+"""
+Dijkstra's algorithm: finds the route with the lowest total travelling time between 2 airports.
+"""
 
 def MinimumTimeFunction(graphDict, originAirportId=None, wantedDestination=None):
     """

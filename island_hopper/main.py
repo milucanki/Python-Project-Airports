@@ -3,10 +3,13 @@ from .bfs import breadthFirstSearch, FurthestPointFunction
 from .decryptor import DecryptID
 from .dijkstra import MinimumTimeFunction
 from .visualization import VisualizeRoute, VisualizeEntireGraph,VisualizeRouteInEntireGraph
-
-
+"""
+Terminal menu of Island Hopper: asks the user what to calculate and shows the result and visualization.
+"""
 def main():
-    # Running the Island Hopper terminal menu
+    """
+    Running the Island Hopper terminal menu
+    """
     print("Connected to main.py succesfully...")
     print()
 
@@ -132,7 +135,7 @@ def main():
                         furthestPointDistance = furthestPointInfoTuple[2]
                         print()
                         print(f"Farthest reachable airport: {graphDict[furthestAirportId]['name']}")
-                        print(f"Distance from Milan Malpensa: {round(furthestPointDistance, 2)} km")
+                        print(f"Distance from origin: {round(furthestPointDistance, 2)} km")
                         print(f"Number of flights: {len(furthestPointPath) - 2}")
                         print(f"Total journey time: {round(furthestPointTime, 2)} hours")
                         

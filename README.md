@@ -49,14 +49,14 @@ It contains information about the countries where the airports are, including th
 
 1. Clone the repository and enter the folder:
    ```bash
-   git clone https://github.com/<your-user>/Python-Project-Airports.git
+   git clone https://github.com/milucanki/Python-Project-Airports
    cd Python-Project-Airports
    ```
    
-2. Create a virtual environment and install the dependencies
+2. Create a virtual environment and install the dependencies (Python 3.10 or newer):
    ```bash
    python -m venv .venv
-   source .venv/bin/activate        # on Windows: .venv\Scripts\activate
+   source .venv/bin/activate        # on Windows: .venv/Scripts/activate
    pip install -r requirements.txt
    ```
 
@@ -66,7 +66,8 @@ Start the application from the project folder:
 ```
 python -m island_hopper.main
 ```
-Follow the terminal prompts' instructions and choose which values you want to insert or what functionality you want to use. After making your choices, the application calculates the requested route type using BFS or Dijkstra and displays the data about this route, together with the corresponding visualization.
+Follow the terminal prompts' instructions and choose which values you want to insert or what functionality you want to use. After making your choices, the application calculates the requested route type using BFS or Dijkstra and displays the data about this route, together with the corresponding visualization. 
+Usually, it will take a bit of time to make all of the calculations.
 
 ### The example notebook
 
