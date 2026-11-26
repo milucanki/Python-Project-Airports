@@ -24,7 +24,7 @@ Each airport is then represented as a node in a graph (`island_hopper/extractor.
 
 ## Data sources
 
-- **[OurAirports Dataset](https://ourairports.com/data/) ([Github Version](https://github.com/davidmegginson/ourairports-data))**: the 
+- **[OurAirports Dataset](https://ourairports.com/data/) ([Github Version](https://github.com/davidmegginson/ourairports-data))**: the original data source that contains the CSV files.
 - **`data/airports.csv`**: the local file downloaded from the OurAirports dataset.
 It contains many airports and their corresponding information.
 - **`data/validAirports.csv`**: the local file that was cleaned and filtered from `data/airports.csv`.
@@ -70,7 +70,7 @@ Follow the terminal prompts' instructions and choose which values you want to in
 
 ### The example notebook
 
-[`notebooks/island_hopper_walkthrough.ipynb`](notebooks/island_hopper_walkthrough.ipynb) demonstrates the project step by step. It shows how the airport data was cleaned, the graph construction and visualiztion. Algorithms such as BFS and Dijkstra are shown 
+[`notebooks/island_hopper_walkthrough.ipynb`](notebooks/island_hopper_walkthrough.ipynb) demonstrates the project step by step. It shows how the airport data was cleaned, the graph construction and visualization. Algorithms such as BFS and Dijkstra are also explained.
 
 Start Jupyter from the project folder and open it:
 
