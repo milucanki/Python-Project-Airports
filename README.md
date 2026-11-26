@@ -55,7 +55,7 @@ It contains information about the countries where the airports are, including th
    
 2. Create a virtual environment and install the dependencies (Python 3.10 or newer):
    ```bash
-   python -m venv .venv
+   python -m venv .venv # or py -m venv .venv
    source .venv/bin/activate        # on Windows: .venv/Scripts/activate
    pip install -r requirements.txt
    ```
@@ -78,6 +78,8 @@ Start Jupyter from the project folder and open it:
 ```bash
 jupyter lab
 ```
+
+Then copy paste the URL provided on your browser and access the Jupyter Notebook.
 
 ## Project structure
 ```
