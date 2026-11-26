@@ -66,9 +66,7 @@ Start the application from the project folder:
 ```
 python -m island_hopper.main
 ```
-Follow the terminal prompts 
-
-After making your choices, the application calculates the requested route type using BFS or Dijkstra and displays the data about this route, together with the corresponding visualization.
+Follow the terminal prompts' instructions and choose which values you want to insert or what functionality you want to use. After making your choices, the application calculates the requested route type using BFS or Dijkstra and displays the data about this route, together with the corresponding visualization.
 
 ### The example notebook
 
@@ -79,8 +77,6 @@ Start Jupyter from the project folder and open it:
 ```bash
 jupyter lab
 ```
-
-
 
 ## Project structure
 ```
@@ -105,3 +101,6 @@ Python Project Airports/
 ├── requirements.txt
 └── README.md
 ```
+
+Everything in `island_hopper/` is Python code that can be reused in the Jupyter notebook (`notebooks/`) or a script.
+The main program (`main.py`) handles user interaction through the terminal.
